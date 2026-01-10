@@ -105,8 +105,8 @@ const Borrowers = () => {
                     </motion.div>
                 </div>
             <div className='flex gap-30'>
-                <div className='w-[30em] ml-10'><img src="/hotel.jpg" alt="" className='rounded-2xl' /></div>
-                <div className='w-[30em] mt-60 '><img src="/twoStory.jpg" alt="" className='rounded-2xl' /></div>
+                <div className='w-[30em] -translate-y-20 ml-10'><img src="/hotel.jpg" alt="" className='rounded-2xl' /></div>
+                <div className='w-[30em] mt-40 '><img src="/twoStory.jpg" alt="" className='rounded-2xl' /></div>
             </div>
           </motion.div>
         </div>
