@@ -9,6 +9,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Navbar from '../components/Navbar';
+import WhoWeHelpSection from '../components/WhoWeHelpSection';
 
 const whoWeHelp = [
   {
@@ -66,81 +67,67 @@ const faqs = [
 
 const Borrowers = () => {
   return (
-    <div>
+    <div className=''>
         <Navbar />
       {/* Hero */}
-      <section className="relative bg-gray-900 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 opacity-90" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,_rgba(255,255,255,0.04)_0%,_transparent_50%)]" />
-
-        <div className="relative container mx-auto px-6 py-20 md:py-28 lg:py-36">
+      <section className="relative px-10 bg-white text-black overflow-hidden">
+        <div className="relative  px-6 py-20 md:py-28 lg:py-36">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-3xl"
+            className=""
           >
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-[1.1] tracking-tight">
+            <h1 className="font-serif max-w-3xl text-4xl md:text-5xl lg:text-6xl font-normal leading-[1.1] tracking-tight">
               Mortgage solutions for{" "}
               <span className="italic">real situations.</span>
             </h1>
-
-            <p className="mt-8 text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed">
-              If a bank decision does not reflect the full picture, we help structure a plan 
-              that fits your asset and your timeline.
-            </p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-10"
-            >
-              <a 
-                href="/contact"
-                className="inline-flex items-center px-8 py-4 bg-orange-500 text-white text-lg font-medium rounded-lg hover:bg-orange-600 transition-colors"
-              >
-                Start a Scenario
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </a>
-            </motion.div>
+            <div className='flex flex-col justify-end items-end'>
+                <p className="mt-8 max-w-[500px]    text-lg md:text-xl text-black leading-relaxed">
+                If a bank decision does not reflect the full picture, we help structure a plan 
+                that fits your asset and your timeline.
+                </p>
+                </div>
+                <div className='flex flex-col mr-40 justify-end items-end'>
+                    <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="mt-3"
+                    >
+                    <a 
+                        href="/contact"
+                        className="inline-flex items-center px-8 py-4 bg-orange-500 text-white text-lg font-medium rounded-lg hover:bg-orange-600 transition-colors"
+                    >
+                        Start a Scenario
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                    </a>
+                    </motion.div>
+                </div>
+            <div className='flex gap-30'>
+                <div className='w-[30em] ml-10'><img src="/hotel.jpg" alt="" className='rounded-2xl' /></div>
+                <div className='w-[30em] mt-60 '><img src="/twoStory.jpg" alt="" className='rounded-2xl' /></div>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Who We Help */}
-      <section className="bg-white py-16 md:py-20 px-6">
-        <div className="container mx-auto max-w-7xl">
-          <div className="max-w-3xl mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-4">Who we help</h2>
-            <p className="text-xl text-gray-600">
-              We work with borrowers across a range of situations where traditional lending falls short.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {whoWeHelp.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="p-6 rounded-xl bg-white border border-gray-200 hover:shadow-md transition-shadow"
-              >
-                <div className="p-3 rounded-lg bg-gray-100 inline-block">
-                  <item.icon className="h-6 w-6 text-gray-900" />
-                </div>
-                <h3 className="mt-4 font-serif text-xl text-gray-900">{item.title}</h3>
-                <p className="mt-2 text-gray-600">{item.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <div data-scroll-section data-scroll-section-id="stacking-section">
+        <WhoWeHelpSection />
+      </div>
+      <style>{`
+        [data-scroll-section-id="stacking-section"] {
+            position: relative !important;
+            transform: none !important;
+        }
+        
+        [data-scroll-section-id="stacking-section"] [style*="position: sticky"] {
+            position: sticky !important;
+        }
+        `}</style>
 
       {/* Process */}
-      <section className="bg-[#faf8f5] py-16 md:py-20 px-6">
+      <section className="bg-[#faf8f5] py-16 md:py-20 px-10">
         <div className="container mx-auto max-w-7xl">
           <div className="max-w-3xl mb-12">
             <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-4">What to expect</h2>
@@ -159,8 +146,8 @@ const Borrowers = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="flex items-start gap-6 py-6 border-b border-gray-200 last:border-0"
               >
-                <span className="font-serif text-4xl text-orange-500/50">{item.step}</span>
-                <div className="pt-2">
+                <span className="font-serif text-7xl text-orange-500/50">{item.step}</span>
+                <div className="pt-8">
                   <h4 className="font-serif text-xl text-gray-900">{item.title}</h4>
                 </div>
               </motion.div>
@@ -170,13 +157,14 @@ const Borrowers = () => {
       </section>
 
       {/* FAQs */}
-      <section className="bg-white py-16 md:py-20 px-6">
-        <div className="container mx-auto max-w-7xl">
+      <section className="bg-white py-16 md:py-20 px-10">
+        <div className="container justify-between flex gap-10 mx-auto max-w-7xl">
           <div className="max-w-3xl mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl text-gray-900">Borrower FAQs</h2>
+            <h2 className="font-serif text-3xl md:text-5xl text-gray-900">Borrower FAQs</h2>
+            <h3 className='text-gray-900 mt-2'>Have any questions ?</h3>
           </div>
 
-          <div className="max-w-3xl space-y-8">
+          <div className="max-w-2xl mt-10 space-y-8">
             {faqs.map((faq, index) => (
               <motion.div
                 key={index}
