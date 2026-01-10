@@ -90,7 +90,7 @@ export default function HowItWorks() {
             alt="" 
             className="absolute inset-0 w-full h-full object-cover opacity-40"
           />
-          <div className="absolute inset-0 bg-gray-900/70" />
+          <div className="absolute inset-0 bg-gray-900/30" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_rgba(249,115,22,0.1)_0%,_transparent_50%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,_rgba(255,255,255,0.03)_0%,_transparent_40%)]" />
         </div>
@@ -104,12 +104,12 @@ export default function HowItWorks() {
               transition={{ duration: 0.6 }}
               className="text-white mt-20 lg:mt-30 relative z-10"
             >
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-[1.1] tracking-tight">
+              <h1 className="font-serif text-4xl  font-normal leading-[1.1] tracking-tight">
                 Traditional mortgages.{" "}
                 <span className="italic text-orange-400">Modern administration.</span>
               </h1>
 
-              <p className="mt-6 text-lg md:text-xl text-gray-300 max-w-xl leading-relaxed">
+              <p className="mt-6 text-lg  text-gray-300 max-w-xl leading-relaxed">
                 We don't change how mortgages are closed or registered. We add an operational 
                 layer that makes participation tracking, servicing, and reporting cleaner.
               </p>
@@ -122,14 +122,14 @@ export default function HowItWorks() {
               >
                 <a 
                   href="/contact"
-                  className="inline-flex items-center justify-center px-6 py-4 bg-orange-600 text-white text-base font-medium rounded-lg hover:bg-orange-600/90 transition-colors"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-orange-600 text-white text-base font-medium rounded-lg hover:bg-orange-600/90 transition-colors"
                 >
                   Get Started
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </a>
                 <a 
                   href="#flow"
-                  className="inline-flex items-center justify-center px-6 py-4 border-2 border-white/30 text-white text-base font-medium rounded-lg hover:bg-white/5 transition-colors"
+                  className="inline-flex items-center justify-center px-6 py-3 border-2 border-white/30 text-white text-base font-medium rounded-lg hover:bg-white/5 transition-colors"
                 >
                   See The Flow
                 </a>
@@ -202,7 +202,7 @@ export default function HowItWorks() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto mb-12 md:mb-16"
+            className=" mb-12 md:mb-16"
           >
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-4">
               Building on <span className="italic">what works</span>
@@ -293,7 +293,7 @@ export default function HowItWorks() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto mb-12 md:mb-16"
+            className="  mb-12 md:mb-16"
           >
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-4">
               The Syndara <span className="italic">flow</span>
@@ -337,11 +337,8 @@ export default function HowItWorks() {
       </section>
 
       {/* CTA - Split Design */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gray-900" />
-        <div className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-orange-600/20 to-transparent" />
-        <div className="absolute left-0 bottom-0 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl" />
-        
+      <section className="relative bg-[#faf8f5] text-black overflow-hidden">
+       
         <div className="relative container mx-auto px-6 md:px-10 py-16 md:py-20 lg:py-28">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -349,11 +346,11 @@ export default function HowItWorks() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white font-normal tracking-tight">
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-black font-normal tracking-tight">
                 Ready to <br />
                 <span className="italic text-orange-400">learn more?</span>
               </h2>
-              <p className="mt-4 md:mt-6 text-base md:text-lg text-gray-300 max-w-md">
+              <p className="mt-4 md:mt-6 text-base md:text-lg text-gray-900 max-w-md">
                 Whether you're a borrower or investor, we'd be happy to discuss how this works.
               </p>
             </motion.div>
@@ -373,7 +370,7 @@ export default function HowItWorks() {
               </a>
               <a 
                 href="/investors"
-                className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 border-2 border-white/20 text-white text-base md:text-lg font-medium rounded-lg hover:bg-white/5 transition-colors"
+                className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 border-2 border-black text-black text-base md:text-lg font-medium rounded-lg hover:bg-white/5 transition-colors"
               >
                 Request Early Access
               </a>

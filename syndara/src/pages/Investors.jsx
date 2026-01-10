@@ -103,7 +103,7 @@ const Investors = () => {
               </motion.div>
             </div>
             
-            <div className='flex flex-col md:flex-row gap-6 md:gap-10 mt-8 md:mt-0'>
+            <div className='flex flex-col md:flex-row gap-6 md:gap-25 mt-8 md:mt-0'>
               <div className='w-full md:w-[28em] lg:w-[30em] md:-translate-y-20 md:ml-10'>
                 <img src="/cloudy.jpg" alt="Investment property" className='rounded-2xl w-full' />
               </div>

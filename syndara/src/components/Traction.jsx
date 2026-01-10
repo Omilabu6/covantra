@@ -162,12 +162,6 @@ const TractionSection = () => {
             }`}>
               Mortgages funded since 2020
             </p>
-            <div className={`mt-4 md:mt-6 flex items-center justify-center gap-2 text-sm text-gray-600 transition-all duration-500 delay-500 ${
-              heroCounter.isVisible ? 'opacity-100' : 'opacity-0'
-            }`}>
-              <span className="w-2 h-2 rounded-full bg-orange-600 animate-pulse" />
-              <span>Publicly stated</span>
-            </div>
           </div>
         </div>
 

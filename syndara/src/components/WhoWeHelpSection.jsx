@@ -21,7 +21,7 @@ const whoWeHelp = [
     icon: Briefcase,
     title: "Business Owners",
     description: "From securing commercial properties to managing cash flow with business lines of credit, we partner with entrepreneurs who need a financing partner that understands business cycles, seasonal fluctuations, and growth opportunities.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=80",
+    image: "/gray.jpg",
     color: "#047857"
   },
   {
@@ -62,10 +62,10 @@ const WhoWeHelpSection = () => {
   const Icon = currentItem.icon;
 
   return (
-    <section className="bg-white py-20 px-10">
-      <div className="max-w-7xl mx-auto">
+    <section className="bg-white py-20 ">
+      <div className="max-w-7xl mx-auto ">
         {/* Header */}
-        <div className=" mb-16">
+        <div className=" mb-16 px-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -82,7 +82,7 @@ const WhoWeHelpSection = () => {
         </div>
 
         {/* Slider */}
-        <div className="relative max-w-6xl mx-auto">
+        <div className="relative px-2.5 max-w-6xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
@@ -102,7 +102,7 @@ const WhoWeHelpSection = () => {
                   </div>
 
                   {/* Text Content */}
-                  <h3 className="font-serif text-3xl md:text-4xl text-white mb-4">
+                  <h3 className="font-serif  text-3xl md:text-4xl text-white mb-4">
                     {currentItem.title}
                   </h3>
                   <p className="text-white/90 text-lg leading-relaxed mb-8">
@@ -110,7 +110,7 @@ const WhoWeHelpSection = () => {
                   </p>
 
                   {/* Counter */}
-                  <div className="flex items-center gap-4 text-white/60">
+                  <div className="flex  items-center gap-4 text-white/60">
                     <span className="font-serif text-6xl font-bold">
                       {String(currentIndex + 1).padStart(2, '0')}
                     </span>

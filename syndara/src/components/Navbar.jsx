@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const navigation = [
   { name: "Borrowers", href: "/borrowers" },
@@ -45,8 +46,6 @@ export function Navbar() {
             ))}
           </div>
 
-         
-
           {/* Mobile Menu Button */}
           <button
             type="button"
@@ -54,51 +53,77 @@ export function Navbar() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <span className="sr-only">Open menu</span>
-            {mobileMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
+            <AnimatePresence mode="wait">
+              {mobileMenuOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X className="h-6 w-6" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Menu className="h-6 w-6" />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </button>
         </nav>
 
         {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-white/50 bg-white/90 backdrop-blur-lg">
-            <div className="max-w-7xl mx-auto px-4 py-4 space-y-2">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`block px-3 py-2.5 text-base font-medium rounded-md transition-colors ${
-                    location.pathname === item.href
-                      ? "text-gray-900 bg-white/70"
-                      : "text-gray-700 hover:text-gray-900 hover:bg-white/50"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
-              <div className="pt-4 flex flex-col gap-3 border-t border-gray-200 mt-4">
-                <Link 
-                  to="/contact" 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full px-4 py-2 text-center font-medium border border-gray-300 rounded-md hover:bg-white/50 transition-colors bg-white/30"
-                >
-                  Submit a Scenario
-                </Link>
-                <Link 
-                  to="/contact?type=investor" 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full px-4 py-2 text-center font-medium bg-amber-500 text-white rounded-md hover:bg-amber-600 transition-colors"
-                >
-                  Join Early Access
-                </Link>
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="lg:hidden border-t border-white/50 bg-white/90 backdrop-blur-lg overflow-hidden"
+            >
+              <div className="max-w-7xl mx-auto px-4 py-4 space-y-2">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`block px-3 py-2.5 text-base font-medium rounded-md transition-colors ${
+                      location.pathname === item.href
+                        ? "text-gray-900 bg-white/70"
+                        : "text-gray-700 hover:text-gray-900 hover:bg-white/50"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+                <div className="pt-4 flex flex-col gap-3 border-t border-gray-200 mt-4">
+                  <Link 
+                    to="/contact" 
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full px-4 py-2 text-center font-medium border border-gray-300 rounded-md hover:bg-white/50 transition-colors bg-white/30"
+                  >
+                    Submit a Scenario
+                  </Link>
+                  <Link 
+                    to="/contact?type=investor" 
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full px-4 py-2 text-center font-medium bg-amber-500 text-white rounded-md hover:bg-amber-600 transition-colors"
+                  >
+                    Join Early Access
+                  </Link>
+                </div>
               </div>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
     </>
   );
