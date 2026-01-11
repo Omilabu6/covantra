@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from "framer-motion";
+import { Link } from 'react-router-dom';
 import {
   CheckCircle2,
   Clock,
@@ -14,7 +15,7 @@ import {
 } from "lucide-react";
 import Navbar from '../components/Navbar';
 import { Footer } from '../components/Footer';
-
+import {Link} from 'react-router-dom';
 const existsToday = [
   "Origination, underwriting, and closing through standard processes",
   "Legal registration remains fully traditional",
@@ -121,19 +122,19 @@ export default function HowItWorks() {
                 transition={{ duration: 0.5, delay: 0.5 }}
                 className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4"
               >
-                <a 
-                  href="/contact"
+                <Link
+                  to="/contact"
                   className="inline-flex items-center justify-center px-6 py-3 bg-orange-600 text-white text-base font-medium rounded-lg hover:bg-orange-600/90 transition-colors"
                 >
                   Get Started
                   <ArrowRight className="ml-2 h-5 w-5" />
-                </a>
-                <a 
-                  href="#flow"
+                </Link>
+                <Link
+                  to="#flow"
                   className="inline-flex items-center justify-center px-6 py-3 border-2 border-white/30 text-white text-base font-medium rounded-lg hover:bg-white/5 transition-colors"
                 >
                   See The Flow
-                </a>
+                </Link>
               </motion.div>
             </motion.div>
 
@@ -362,19 +363,19 @@ export default function HowItWorks() {
               viewport={{ once: true }}
               className="flex flex-col sm:flex-row gap-4 lg:justify-end"
             >
-              <a 
-                href="/contact"
+              <Link 
+                to="/contact"
                 className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 bg-orange-600 text-white text-base md:text-lg font-medium rounded-lg hover:bg-orange-600/90 transition-colors"
               >
                 Submit a Scenario
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </a>
-              <a 
-                href="/investors"
+              </Link>
+              <Link
+                to="/investors"
                 className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 border-2 border-black text-black text-base md:text-lg font-medium rounded-lg hover:bg-white/5 transition-colors"
               >
                 Request Early Access
-              </a>
+              </Link>
             </motion.div>
           </div>
         </div>

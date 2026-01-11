@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "../components/Navbar";
+import { Link } from "react-router-dom";
 import { 
   BookOpen, 
   ArrowRight, 
@@ -341,13 +342,13 @@ export default function Resources() {
                 viewport={{ once: true }}
                 className="lg:text-right"
               >
-                <a 
-                  href="/contact" 
+                <Link 
+                  to="/contact" 
                   className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
                 >
                   Submit a Topic
                   <ArrowRight className="ml-2 h-5 w-5" />
-                </a>
+                </Link>
               </motion.div>
             </div>
           </div>

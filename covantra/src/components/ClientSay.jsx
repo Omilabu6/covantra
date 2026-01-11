@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, ArrowDown } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const ClientSay = () => {
   return (
@@ -39,7 +40,7 @@ const ClientSay = () => {
               <p className="text-base md:text-lg leading-relaxed text-gray-900 mb-8 md:mb-10">
                 For clients who value expertise, your mortgage journey is not just about rates — it's about strategy. We provide clarity, structure complex scenarios, and execute with precision. From the first consultation to closing, every detail is handled with discretion and care.
               </p>
-              <a href="/about">
+              <Link to="/about">
                 <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -48,7 +49,7 @@ const ClientSay = () => {
                     <ArrowDown className="h-4 w-4" />
                     LEARN MORE
                 </motion.button>
-              </a>
+              </Link>
             </motion.div>
           </div>
         </div>
@@ -82,21 +83,21 @@ const ClientSay = () => {
               </p>
               <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4 justify-center">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <a 
-                    href="/contact"
+                  < Link
+                    to="/contact"
                     className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 bg-gray-900 text-white text-base md:text-lg font-medium rounded-lg hover:bg-gray-900/90 transition-colors"
                   >
                     Submit a Scenario
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </a>
+                  </Link>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <a 
-                    href="/contact?type=investor"
+                  <Link 
+                    to="/contact?type=investor"
                     className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 bg-white text-orange-600 border-2 border-orange-600 text-base md:text-lg font-medium rounded-lg hover:bg-orange-100 transition-colors"
                   >
                     Request Early Access
-                  </a>
+                  </Link>
                 </motion.div>
               </div>
             </motion.div>

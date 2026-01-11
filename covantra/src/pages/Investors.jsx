@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from "framer-motion";
+import { Link } from 'react-router-dom';
 import {
   Shield,
   FileText,
@@ -94,13 +95,13 @@ const Investors = () => {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="mt-4 md:mt-6"
               >
-                <a 
-                  href="/contact?type=investor"
+                <Link 
+                  to="/contact?type=investor"
                   className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-orange-500 text-white text-base sm:text-lg font-medium rounded-lg hover:bg-orange-600 transition-colors"
                 >
                   Join Early Access
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-                </a>
+                </Link>
               </motion.div>
             </div>
             
@@ -234,19 +235,19 @@ const Investors = () => {
                 Request onboarding details and we'll be in touch about eligibility.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                <a 
-                  href="/contact?type=investor"
+                <Link
+                  to="/contact?type=investor"
                   className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 bg-orange-500 text-white text-base md:text-lg font-medium rounded-lg hover:bg-orange-600 transition-colors"
                 >
                   Request Early Access
                   <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
-                </a>
-                <a 
-                  href="/contact"
+                </Link>
+                <Link 
+                  to="/contact"
                   className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 border-2 border-white/20 text-white text-base md:text-lg font-medium rounded-lg hover:bg-white/5 transition-colors"
                 >
                   Contact Us
-                </a>
+                </Link>
               </div>
             </motion.div>
           </div>

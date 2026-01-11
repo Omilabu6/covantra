@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Building2, Wallet, Clock, ArrowRight, MapPin, TrendingUp, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Navbar from '../components/Navbar';
 import { Footer } from "../components/Footer";
 
@@ -96,19 +97,19 @@ const CaseStudies = () => {
                 transition={{ delay: 0.4 }}
                 className="mt-8 flex flex-col sm:flex-row gap-4"
               >
-                <a 
-                  href="/contact" 
+                <Link
+                  to="/contact" 
                   className="inline-flex items-center justify-center px-6 py-3 bg-orange-600 text-white rounded-lg font-medium hover:bg-orange-700 transition-colors"
                 >
                   Submit a Scenario
                   <ArrowRight className="ml-2 h-5 w-5" />
-                </a>
-                <a 
-                  href="#cases" 
+                </Link>
+                <Link 
+                  to="#cases" 
                   className="inline-flex items-center justify-center px-6 py-3 bg-white/10 text-white rounded-lg font-medium border border-white/20 hover:bg-white/20 transition-colors"
                 >
                   View Cases
-                </a>
+                </Link>
               </motion.div>
             </motion.div>
 
@@ -266,19 +267,19 @@ const CaseStudies = () => {
               viewport={{ once: true }}
               className="flex flex-col sm:flex-row gap-4 lg:justify-center mt-8"
             >
-              <a 
-                href="/contact" 
+              <Link 
+                to="/contact" 
                 className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
               >
                 Submit a Scenario
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </a>
-              <a
-                href="/contact?type=investor"
+              </Link>
+              <Link
+                to="/contact?type=investor"
                 className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium bg-white text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
               >
                 Request Early Access
-              </a>
+              </Link>
             </motion.div>
           </div>
         </div>

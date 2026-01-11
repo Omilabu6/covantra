@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 import  WhoWeHelpSection  from '../components/WhoWeHelpSection';
 import {
@@ -100,13 +100,13 @@ const Borrowers = () => {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="mt-4 md:mt-6"
               >
-                <a 
-                  href="/contact"
+                <Link
+                  to="/contact"
                   className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-orange-500 text-white text-base sm:text-lg font-medium rounded-lg hover:bg-orange-600 transition-colors"
                 >
                   Start a Scenario
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-                </a>
+                </Link>
               </motion.div>
             </div>
             
@@ -210,13 +210,13 @@ const Borrowers = () => {
                 We'll tell you what's realistic and outline the next steps.
               </p>
               <div className="mt-6 md:mt-8">
-                <a 
-                  href="/contact"
+                <Link 
+                  to="/contact"
                   className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-orange-500 text-white text-base sm:text-lg font-medium rounded-lg hover:bg-orange-600 transition-colors"
                 >
                   Start a Scenario
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-                </a>
+                </Link>
               </div>
             </motion.div>
           </div>
