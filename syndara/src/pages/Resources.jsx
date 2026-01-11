@@ -110,7 +110,7 @@ export default function Resources() {
   const regularResources = filteredResources.filter(r => !r.featured);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="data-scroll-section bg-white">
       <Navbar />
 
       {/* Hero Section */}

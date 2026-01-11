@@ -74,7 +74,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen  bg-white">
+    <div className="data-scroll-section  bg-white">
       <Navbar />
       
       {/* Toast Notification */}

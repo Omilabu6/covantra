@@ -44,7 +44,7 @@ const caseStudies = [
 
 const CaseStudies = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="data-scroll-section bg-white">
       <Navbar />
 
       {/* Hero Section */}

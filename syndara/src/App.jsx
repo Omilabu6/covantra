@@ -14,6 +14,7 @@ import Contact from './pages/Contact';
 import ScrollToTop from './components/ScrollToTop';
 import CustomCursor from './components/CustomCursor';
 import SmoothScroll from './components/SmoothScroll';
+import { Footer } from './components/Footer';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -46,6 +47,7 @@ const App = () => {
             <Route path="/resources" element={<Resources />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
+          <Footer />
         </SmoothScroll>
         
         {isLoading && <LoadingReveal onComplete={() => setIsLoading(false)} />}

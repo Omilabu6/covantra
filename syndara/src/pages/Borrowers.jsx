@@ -70,7 +70,7 @@ const faqs = [
 
 const Borrowers = () => {
   return (
-    <div className='bg-white'>
+    <div className='bg-white data-scroll-section'>
         <Navbar />
       {/* Hero */}
       <section className="relative px-4 sm:px-6 md:px-10 bg-white text-black overflow-hidden pt-24">
@@ -121,7 +121,7 @@ const Borrowers = () => {
         </div>
       </section>
 
-      <div data-scroll-section data-scroll-section-id="stacking-section">
+      <div >
         <WhoWeHelpSection />
       </div>
       <style>{`

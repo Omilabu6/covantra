@@ -78,7 +78,7 @@ const FloatingCard = ({ delay, className, children }) => (
 
 export default function HowItWorks() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="data-scroll-section bg-white">
         <Navbar />
       
       {/* Hero - Asymmetric Split Design */}

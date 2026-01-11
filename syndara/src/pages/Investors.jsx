@@ -64,7 +64,7 @@ const experience = [
 
 const Investors = () => {
   return (
-    <div className="bg-white">
+    <div className="data-scroll-section bg-white">
         <Navbar />
       {/* Hero - Similar to Borrowers */}
       <section className="relative px-4 sm:px-6 md:px-10 bg-white text-black overflow-hidden pt-24">
