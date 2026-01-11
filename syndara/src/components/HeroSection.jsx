@@ -8,7 +8,7 @@ const HeroSection = () => {
     '/bg.png',
     '/longHouse.png',
     '/shiny.webp',
-    '/bluey.png'
+    '/twoStory.png'
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -16,7 +16,7 @@ const HeroSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 9000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [images.length]);
@@ -92,6 +92,10 @@ const HeroSection = () => {
           animate="visible"
         >
           <motion.h1 
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
+             viewport={{ once: false }}
             variants={itemVariants}
             data-scroll
             data-scroll-speed="1.5" 

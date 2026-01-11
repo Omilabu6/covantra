@@ -1,81 +1,5 @@
-// import React from 'react'
-// import { Users, FileText, BarChart3, Shield } from 'lucide-react'
-// import { motion } from 'framer-motion'
-
-// const Card3D = ({ children, className }) => (
-//   <div className={className}>{children}</div>
-// );
-
-// // Sample platform capabilities data
-// const platformCapabilities = [
-//   {
-//     icon: Users,
-//     title: "Investor Portal",
-//     description: "Secure access for eligible investors to track their participation and returns"
-//   },
-//   {
-//     icon: FileText,
-//     title: "Servicing Workflows",
-//     description: "Automated processes for payment distribution and compliance tracking"
-//   },
-//   {
-//     icon: BarChart3,
-//     title: "Standardized Reporting",
-//     description: "Real-time reporting and analytics for all stakeholders"
-//   },
-//   {
-//     icon: Shield,
-//     title: "Compliance Framework",
-//     description: "Built-in regulatory compliance and audit trail capabilities"
-//   }
-// ];
-
-// const InDevelopment = () => {
-//   return (
-//     <div className="py-12 md:py-16 pb-16 md:pb-30 px-6 md:px-10 bg-[#faf8f5]">
-//       <div className="max-w-6xl mx-auto">
-//         <div className="float-in" style={{ perspective: "1000px" }}>
-          
-//           <h2 className="reveal-text font-serif text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-gray-900">
-//             What Syndara is building.
-//           </h2>
-//           <p className="mt-4 md:mt-6 text-base md:text-lg text-gray-600 leading-relaxed max-w-5xl">
-//             A permissioned participation and servicing system designed to support eligible investor
-//             participation tracking, servicing workflows, and standardized reporting.
-//           </p>
-
-//           <div className="grid grid-cols-1 lg:grid-cols-2 pt-8 md:pt-10 pr-0 lg:pr-20 gap-6 md:gap-8">
-//             {platformCapabilities.map((cap, index) => (
-//               <Card3D key={index} className="group">
-//                 <motion.div
-//                   initial={{ opacity: 0, y: 20 }}
-//                   whileInView={{ opacity: 1, y: 0 }}
-//                   viewport={{ once: true }}
-//                   transition={{ delay: index * 0.1 }}
-//                   whileHover={{ y: -5 }}
-//                   className="flex min-h-[180px] md:min-h-[200px] items-start gap-4 p-5 md:p-6 rounded-xl bg-white border border-gray-300 hover:border-orange-600 transition-all shadow-sm hover:shadow-md"
-//                 >
-//                   <div className="mt-1 p-2.5 md:p-3 rounded-lg bg-gray-100 group-hover:bg-orange-100 transition-colors flex-shrink-0">
-//                     <cap.icon className="h-5 w-5 md:h-6 md:w-6 text-orange-600 transition-colors" />
-//                   </div>
-//                   <div className="flex-1 flex flex-col justify-center">
-//                     <h5 className="font-sans font-semibold text-lg md:text-xl text-gray-900 mb-2 md:mb-3">{cap.title}</h5>
-//                     <p className="text-sm md:text-base leading-relaxed text-gray-600">{cap.description}</p>
-//                   </div>
-//                 </motion.div>
-//               </Card3D>
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default InDevelopment
 import React from 'react';
 import { Users, FileText, BarChart3, Shield } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const platformCapabilities = [
   {
@@ -109,51 +33,36 @@ const PhoneMockup = ({ activeIndex }) => {
       {/* Phone Frame */}
       <div className="relative bg-gray-800 rounded-[2.2rem] p-2 shadow-2xl">
         {/* Phone Screen */}
-        <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-[1.8rem] aspect-[9/19] overflow-hidden relative transition-all duration-500">
+        <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-[1.8rem] aspect-[9/19] overflow-hidden relative">
           {/* Screen Content */}
-          <motion.div 
+          <div 
             key={activeIndex}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3 }}
-            className="absolute inset-0 p-5 flex flex-col"
+            className="absolute inset-0 p-5 flex flex-col animate-phone-content"
           >
             {/* Top Section */}
             <div className="flex-1 flex flex-col justify-center items-center text-center">
-              <motion.div 
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.1, type: "spring" }}
-                className="w-16 h-16 rounded-xl bg-white shadow-md flex items-center justify-center mb-5 border border-orange-100"
+              <div 
+                className="w-16 h-16 rounded-xl bg-white shadow-md flex items-center justify-center mb-5 border border-orange-100 animate-icon-bounce"
               >
                 <Icon className="w-8 h-8 text-orange-600" />
-              </motion.div>
+              </div>
               
-              <motion.h3 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="text-gray-900 text-lg font-semibold mb-2"
+              <h3 
+                className="text-gray-900 text-lg font-semibold mb-2 animate-text-slide-up"
               >
                 {activeCard.title}
-              </motion.h3>
+              </h3>
               
-              <motion.p 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="text-gray-600 text-xs leading-relaxed px-3"
+              <p 
+                className="text-gray-600 text-xs leading-relaxed px-3 animate-text-slide-up-delayed"
               >
                 {activeCard.description}
-              </motion.p>
+              </p>
             </div>
 
             {/* Bottom Stats */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="grid grid-cols-2 gap-2"
+            <div 
+              className="grid grid-cols-2 gap-2 animate-stats-slide-up"
             >
               <div className="bg-white rounded-lg p-2.5 shadow-sm border border-orange-100">
                 <div className="text-gray-500 text-[10px] mb-0.5">Status</div>
@@ -163,8 +72,8 @@ const PhoneMockup = ({ activeIndex }) => {
                 <div className="text-gray-500 text-[10px] mb-0.5">Security</div>
                 <div className="text-gray-900 text-sm font-semibold">Secure</div>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
           
           {/* Notch */}
           <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-16 h-4 bg-gray-800 rounded-full" />
@@ -172,13 +81,36 @@ const PhoneMockup = ({ activeIndex }) => {
       </div>
 
       {/* Subtle Shadow */}
-      <div className="absolute inset-0 bg-orange-200/20 blur-2xl -z-10 rounded-full scale-75" />
+      <div className="absolute inset-0 bg-orange-200/20 blur-2xl -z-10 rounded-full scale-75 animate-pulse-slow" />
     </div>
   );
 };
 
 const InDevelopmentSection = () => {
   const [activeIndex, setActiveIndex] = React.useState(0);
+  const [isVisible, setIsVisible] = React.useState(false);
+  const sectionRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -188,13 +120,163 @@ const InDevelopmentSection = () => {
   }, []);
 
   return (
-    <section className="py-16 md:py-24 px-6 md:px-10 bg-[#faf8f5]">
+    <section ref={sectionRef} className="py-16 md:py-24 px-6 md:px-10 bg-[#faf8f5] overflow-hidden">
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fadeInLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes fadeInRight {
+          from {
+            opacity: 0;
+            transform: translateX(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes phoneContentFade {
+          from {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        @keyframes iconBounce {
+          0% {
+            transform: scale(0);
+          }
+          50% {
+            transform: scale(1.1);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+
+        @keyframes textSlideUp {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes pulseSlow {
+          0%, 100% {
+            opacity: 0.3;
+          }
+          50% {
+            opacity: 0.5;
+          }
+        }
+
+        @keyframes slideInCard {
+          from {
+            opacity: 0;
+            transform: translateX(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        .animate-in-view {
+          opacity: 0;
+        }
+
+        .animate-in-view.visible {
+          opacity: 1;
+          animation-fill-mode: forwards;
+        }
+
+        .animate-heading {
+          animation: fadeInLeft 0.6s ease-out;
+        }
+
+        .animate-subheading {
+          animation: fadeInLeft 0.6s ease-out 0.1s;
+        }
+
+        .animate-phone-mockup {
+          animation: fadeInRight 0.7s ease-out 0.3s;
+        }
+
+        .animate-phone-content {
+          animation: phoneContentFade 0.3s ease-out;
+        }
+
+        .animate-icon-bounce {
+          animation: iconBounce 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.1s both;
+        }
+
+        .animate-text-slide-up {
+          animation: textSlideUp 0.3s ease-out 0.2s both;
+        }
+
+        .animate-text-slide-up-delayed {
+          animation: textSlideUp 0.3s ease-out 0.3s both;
+        }
+
+        .animate-stats-slide-up {
+          animation: textSlideUp 0.3s ease-out 0.4s both;
+        }
+
+        .animate-pulse-slow {
+          animation: pulseSlow 3s ease-in-out infinite;
+        }
+
+        .animate-card {
+          animation: slideInCard 0.5s ease-out both;
+        }
+
+        .animate-indicator {
+          animation: iconBounce 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .card-hover-lift {
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-hover-lift:hover {
+          transform: translateY(-4px);
+        }
+      `}</style>
+      
       <div className="max-w-7xl mx-auto">
-        <div className="mb-10 md:mb-16">
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-gray-900">
+        <div className={`mb-10 md:mb-16 animate-in-view ${isVisible ? 'visible' : ''}`}>
+          <h2 className={`font-serif text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-gray-900 ${isVisible ? 'animate-heading' : ''}`}>
             What Syndara is building.
           </h2>
-          <p className="mt-4 md:mt-6 text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl">
+          <p className={`mt-4 md:mt-6 text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl ${isVisible ? 'animate-subheading' : ''}`}>
             A permissioned participation and servicing system designed to support eligible investor
             participation tracking, servicing workflows, and standardized reporting.
           </p>
@@ -204,15 +286,15 @@ const InDevelopmentSection = () => {
           {/* Cards Grid */}
           <div className="space-y-3 md:space-y-4 order-2 lg:order-1">
             {platformCapabilities.map((cap, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.4 }}
-                onHoverStart={() => setActiveIndex(index)}
+                onMouseEnter={() => setActiveIndex(index)}
                 onClick={() => setActiveIndex(index)}
-                className={`group cursor-pointer flex items-start gap-4 p-4 md:p-5 rounded-xl transition-all duration-300 ${
+                style={{ 
+                  animationDelay: `${0.2 + index * 0.1}s`,
+                  opacity: isVisible ? undefined : 0
+                }}
+                className={`${isVisible ? 'animate-card' : ''} card-hover-lift group cursor-pointer flex items-start gap-4 p-4 md:p-5 rounded-xl transition-all duration-300 ${
                   activeIndex === index 
                     ? 'bg-white shadow-lg border-2 border-orange-500' 
                     : 'bg-white/60 hover:bg-white shadow-sm hover:shadow-md border-2 border-transparent'
@@ -236,18 +318,16 @@ const InDevelopmentSection = () => {
                 
                 {/* Active Indicator */}
                 {activeIndex === index && (
-                  <motion.div
-                    layoutId="activeIndicator"
-                    className="w-2 h-2 rounded-full bg-orange-500 flex-shrink-0 mt-2"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  <div
+                    className="w-2 h-2 rounded-full bg-orange-500 flex-shrink-0 mt-2 animate-indicator"
                   />
                 )}
-              </motion.div>
+              </div>
             ))}
           </div>
 
           {/* Phone Mockup */}
-          <div className="flex justify-center lg:justify-end order-1 lg:order-2">
+          <div className={`flex justify-center lg:justify-end order-1 lg:order-2 animate-in-view ${isVisible ? 'visible animate-phone-mockup' : ''}`}>
             <PhoneMockup activeIndex={activeIndex} />
           </div>
         </div>
@@ -258,10 +338,10 @@ const InDevelopmentSection = () => {
             <button
               key={index}
               onClick={() => setActiveIndex(index)}
-              className={`h-1.5 rounded-full transition-all ${
+              className={`h-1.5 rounded-full transition-all duration-300 ${
                 index === activeIndex 
                   ? 'w-6 bg-orange-500' 
-                  : 'w-1.5 bg-gray-300'
+                  : 'w-1.5 bg-gray-300 hover:bg-gray-400'
               }`}
               aria-label={`Go to feature ${index + 1}`}
             />

@@ -15,22 +15,31 @@ const ArrowRight = () => (
 
 // FeatureCard Component
 const FeatureCard = ({ title, description, icon, variant, delay = 0 }) => {
+  const [isHovered, setIsHovered] = useState(false);
   const isLive = variant === "live";
   
   return (
     <div
       className="group opacity-0 animate-fade-up"
       style={{ animationDelay: `${delay}ms` }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className={`aspect-square rounded-2xl mb-5 p-6 flex items-center justify-center transition-all duration-500 group-hover:scale-[1.02] overflow-hidden ${
+        className={`aspect-square rounded-2xl mb-5 p-6 flex items-center justify-center transition-all duration-500 overflow-hidden ${
           isLive ? "bg-orange-100" : "bg-orange-100"
         }`}
+        style={{
+          transform: isHovered ? 'scale(1.02)' : 'scale(1)',
+        }}
       >
         <img
           src={icon}
           alt={title}
-          className="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-110"
+          className="w-full h-full object-cover rounded-xl transition-transform duration-500"
+          style={{
+            transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+          }}
         />
       </div>
       <h3 className="font-sans text-lg font-semibold text-gray-900 mb-2 uppercase tracking-wide">
@@ -46,7 +55,52 @@ const FeatureCard = ({ title, description, icon, variant, delay = 0 }) => {
 // Main Clarity Component
 const Clarity = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 4;
+  const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const sectionRef = React.useRef(null);
+  
+  // Responsive items per page
+  const getItemsPerPage = () => {
+    if (typeof window === 'undefined') return 4;
+    if (window.innerWidth < 640) return 1; // mobile
+    if (window.innerWidth < 1024) return 2; // tablet
+    return 4; // desktop
+  };
+  
+  const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage());
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    // Handle resize
+    const handleResize = () => {
+      setItemsPerPage(getItemsPerPage());
+      setIsMobile(window.innerWidth < 640);
+      // Reset to valid index on resize
+      setCurrentIndex(0);
+    };
+
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const liveFeatures = [
     {
@@ -115,19 +169,142 @@ const Clarity = () => {
   };
 
   return (
-    <section className="relative py-16 md:py-24 lg:py-34 px-6 md:px-10 overflow-hidden bg-[#faf8f5]">
-     <div className="relative max-w-7xl mx-auto">
+    <section ref={sectionRef} className="relative py-16 md:py-24 lg:py-34 px-6 md:px-10 overflow-hidden bg-[#faf8f5]">
+      <style>{`
+        @keyframes fade-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes slide-in-left {
+          from {
+            opacity: 0;
+            transform: translateX(-30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes slide-in-right {
+          from {
+            opacity: 0;
+            transform: translateX(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes scale-in {
+          from {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        @keyframes draw-line {
+          from {
+            width: 0;
+          }
+          to {
+            width: 4rem;
+          }
+        }
+
+        .animate-fade-up {
+          animation: fade-up 0.7s ease-out forwards;
+        }
+
+        .animate-fade-in {
+          animation: fade-in 0.6s ease-out forwards;
+        }
+
+        .animate-slide-left {
+          animation: slide-in-left 0.7s ease-out forwards;
+        }
+
+        .animate-slide-right {
+          animation: slide-in-right 0.7s ease-out forwards;
+        }
+
+        .animate-scale-in {
+          animation: scale-in 0.6s ease-out forwards;
+        }
+
+        .animate-draw-line {
+          animation: draw-line 0.8s ease-out forwards;
+        }
+
+        .section-badge {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .section-badge::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+          animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+          100% {
+            left: 100%;
+          }
+        }
+
+        .hover-lift {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hover-lift:hover:not(:disabled) {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .hover-lift:active:not(:disabled) {
+          transform: translateY(0);
+        }
+      `}</style>
+
+      <div className="relative max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 md:mb-20">
           <h2 
-            className="font-serif text-3xl md:text-4xl lg:text-5xl font-normal text-gray-900 mb-4 md:mb-6 opacity-0 animate-fade-up" 
+            className={`font-serif text-3xl md:text-4xl lg:text-5xl font-normal text-gray-900 mb-4 md:mb-6 ${isVisible ? 'animate-fade-up' : 'opacity-0'}`}
             style={{ animationDelay: '100ms' }}
           >
             Clarity on what exists today
           </h2>
 
           <p 
-            className="text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto opacity-0 animate-fade-up" 
+            className={`text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto ${isVisible ? 'animate-fade-up' : 'opacity-0'}`}
             style={{ animationDelay: '200ms' }}
           >
             We believe in transparency. Here's exactly what's live and what we're building.
@@ -137,9 +314,9 @@ const Clarity = () => {
         {/* Live Today Section */}
         <div className="mb-16 md:mb-24 mt-8 md:mt-10">
           <div className="flex items-center justify-between mb-8 md:mb-10">
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-600">Live Today</span>
-              <div className="w-16 h-px bg-orange-600" />
+            <div className={`flex items-center gap-4 ${isVisible ? 'animate-slide-left' : 'opacity-0'}`} style={{ animationDelay: '250ms' }}>
+              <span className="text-sm text-gray-600 section-badge">Live Today</span>
+              <div className={`h-px bg-orange-600 ${isVisible ? 'animate-draw-line' : 'w-0'}`} style={{ animationDelay: '400ms' }} />
             </div>
           </div>
 
@@ -147,26 +324,26 @@ const Clarity = () => {
             {/* Title on left */}
             <div className="hidden lg:block w-64 flex-shrink-0">
               <h3 
-                className="font-serif text-4xl lg:text-5xl font-normal text-gray-900 opacity-0 animate-fade-up" 
+                className={`font-serif text-4xl lg:text-5xl font-normal text-gray-900 ${isVisible ? 'animate-fade-up' : 'opacity-0'}`}
                 style={{ animationDelay: '300ms' }}
               >
                 What's<br />available?
               </h3>
               <div 
-                className="flex gap-3 mt-8 opacity-0 animate-fade-up" 
-                style={{ animationDelay: '400ms' }}
+                className={`flex gap-3 mt-8 ${isVisible ? 'animate-scale-in' : 'opacity-0'}`}
+                style={{ animationDelay: '450ms' }}
               >
                 <button 
                   onClick={handlePrevious}
                   disabled={currentIndex === 0}
-                  className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+                  className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover-lift transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent"
                 >
                   <ArrowLeft />
                 </button>
                 <button 
                   onClick={handleNext}
                   disabled={currentIndex >= maxIndex}
-                  className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+                  className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover-lift transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent"
                 >
                   <ArrowRight />
                 </button>
@@ -178,7 +355,7 @@ const Clarity = () => {
               <div 
                 className="flex gap-6 transition-all duration-700 ease-in-out"
                 style={{
-                  transform: `translateX(-${currentIndex * (100 / itemsPerPage + 1.5)}%)`,
+                  transform: `translateX(calc(-${currentIndex * 100}% - ${currentIndex * 1.5}rem))`,
                 }}
               >
                 {liveFeatures.map((feature, index) => (
@@ -188,7 +365,7 @@ const Clarity = () => {
                       description={feature.description}
                       icon={feature.icon}
                       variant="live"
-                      delay={350 + index * 100}
+                      delay={isVisible ? 400 + index * 80 : 0}
                     />
                   </div>
                 ))}
@@ -197,18 +374,18 @@ const Clarity = () => {
           </div>
 
           {/* Mobile navigation */}
-          <div className="lg:hidden flex justify-center gap-3 mt-8">
+          <div className={`lg:hidden flex justify-center gap-3 mt-8 ${isVisible ? 'animate-scale-in' : 'opacity-0'}`} style={{ animationDelay: '500ms' }}>
             <button 
               onClick={handlePrevious}
               disabled={currentIndex === 0}
-              className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+              className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover-lift transition-all disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <ArrowLeft />
             </button>
             <button 
               onClick={handleNext}
               disabled={currentIndex >= maxIndex}
-              className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+              className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover-lift transition-all disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <ArrowRight />
             </button>
@@ -216,24 +393,24 @@ const Clarity = () => {
         </div>
 
         {/* In Development Section */}
-        <div className="bg-white rounded-3xl p-6 md:p-8 lg:p-12 mt-12 md:mt-20 shadow-lg border border-gray-300">
+        <div className={`bg-white rounded-3xl p-6 md:p-8 lg:p-12 mt-12 md:mt-20 shadow-lg border border-gray-300 ${isVisible ? 'animate-scale-in' : 'opacity-0'}`} style={{ animationDelay: '600ms' }}>
           <div className="flex items-center justify-between mb-8 md:mb-10">
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-600">In Development</span>
-              <div className="w-16 h-px bg-orange-600" />
+            <div className={`flex items-center gap-4 ${isVisible ? 'animate-slide-left' : 'opacity-0'}`} style={{ animationDelay: '700ms' }}>
+              <span className="text-sm text-gray-600 section-badge">In Development</span>
+              <div className={`h-px bg-orange-600 ${isVisible ? 'animate-draw-line' : 'w-0'}`} style={{ animationDelay: '850ms' }} />
             </div>
           </div>
 
           <div className="mb-8 md:mb-10">
             <h3 
-              className="font-serif text-2xl md:text-3xl lg:text-4xl font-normal text-gray-900 opacity-0 animate-fade-up" 
-              style={{ animationDelay: '600ms' }}
+              className={`font-serif text-2xl md:text-3xl lg:text-4xl font-normal text-gray-900 ${isVisible ? 'animate-fade-up' : 'opacity-0'}`}
+              style={{ animationDelay: '750ms' }}
             >
               What we're building next
             </h3>
             <p 
-              className="text-gray-600 text-sm md:text-base mt-3 max-w-xl opacity-0 animate-fade-up" 
-              style={{ animationDelay: '650ms' }}
+              className={`text-gray-600 text-sm md:text-base mt-3 max-w-xl ${isVisible ? 'animate-fade-up' : 'opacity-0'}`}
+              style={{ animationDelay: '800ms' }}
             >
               Exciting features in our pipeline to enhance your investment experience.
             </p>
@@ -247,29 +424,12 @@ const Clarity = () => {
                 description={feature.description}
                 icon={feature.icon}
                 variant="development"
-                delay={700 + index * 100}
+                delay={isVisible ? 900 + index * 100 : 0}
               />
             ))}
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes fade-up {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-up {
-          animation: fade-up 0.6s ease-out forwards;
-        }
-      `}</style>
     </section>
   );
 };
