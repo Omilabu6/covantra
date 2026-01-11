@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Navbar from '../components/Navbar';
 import { Mail } from 'lucide-react';
-import { Footer } from '../components/Footer';
-
+import Navbar from '../components/Navbar';
 
 const Send = () => (
   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -29,11 +27,53 @@ const investorCategories = ["Accredited Investor", "Eligible Investor", "Institu
 export default function Contact() {
   const [formType, setFormType] = useState("borrower");
   const [showToast, setShowToast] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [toastMessage, setToastMessage] = useState({ title: '', description: '' });
 
-  const handleSubmit = (e) => {
+  // REPLACE THIS WITH YOUR WEB3FORMS ACCESS KEY
+  const WEB3FORMS_ACCESS_KEY = "e76beec5-ebf8-4eb3-a65c-dc1519504f92";
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 3000);
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.target);
+    
+    // Add Web3Forms access key
+    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setToastMessage({
+          title: 'Form submitted successfully!',
+          description: "We'll be in touch within 1-2 business days."
+        });
+        setShowToast(true);
+        e.target.reset();
+      } else {
+        setToastMessage({
+          title: 'Submission failed',
+          description: 'Please try again or email us directly.'
+        });
+        setShowToast(true);
+      }
+    } catch (error) {
+      setToastMessage({
+        title: 'Submission failed',
+        description: 'Please check your connection and try again.'
+      });
+      setShowToast(true);
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setShowToast(false), 4000);
+    }
   };
 
   const containerVariants = {
@@ -75,9 +115,8 @@ export default function Contact() {
   };
 
   return (
-    <div className="  bg-white">
+    <div className="bg-white min-h-screen">
       <Navbar />
-      
       {/* Toast Notification */}
       <AnimatePresence>
         {showToast && (
@@ -85,10 +124,10 @@ export default function Contact() {
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            className="fixed top-4 right-4 bg-orange-600 text-white px-6 py-3 rounded-lg shadow-lg z-50"
+            className="fixed top-4 right-4 bg-orange-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 max-w-sm"
           >
-            <p className="font-semibold">Form submitted</p>
-            <p className="text-sm">We'll be in touch within 1-2 business days.</p>
+            <p className="font-semibold">{toastMessage.title}</p>
+            <p className="text-sm">{toastMessage.description}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -129,20 +168,19 @@ export default function Contact() {
             >
               Tell us what you are trying to do and when you need it done.
             </motion.p>
-             
           </motion.div>
           <a
-              href="mailto:info@covantra.com"
-              className="absolute border-2 border-white right-5 text-white 
-                        flex items-center gap-2 
-                        md:px-6 px-3 py-3 md:py-8 rounded-full 
-                        shadow-lg  font-semibold
-                        hover:bg-white/30
-                        transition"
-            >
-              <Mail size={18} />
-              info@covantra.com
-            </a>
+            href="mailto:info@covantra.com"
+            className="absolute border-2 border-white right-5 text-white 
+                      flex items-center gap-2 
+                      md:px-6 px-3 py-3 md:py-8 rounded-full 
+                      shadow-lg font-semibold
+                      hover:bg-white/30
+                      transition"
+          >
+            <Mail size={18} />
+            <span className="hidden sm:inline">info@covantra.com</span>
+          </a>
         </div>
       </section>
 
@@ -188,14 +226,19 @@ export default function Contact() {
           >
             <AnimatePresence mode="wait">
               {formType === "borrower" ? (
-                <motion.div 
+                <motion.form
                   key="borrower"
+                  onSubmit={handleSubmit}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ duration: 0.3 }}
                   className="space-y-4 sm:space-y-6"
                 >
+                  {/* Hidden fields for Web3Forms */}
+                  <input type="hidden" name="subject" value="New Borrower/Builder Contact Form Submission" />
+                  <input type="hidden" name="from_name" value="Covantra Website" />
+                  
                   <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                     <motion.div 
                       className="space-y-2"
@@ -203,11 +246,13 @@ export default function Contact() {
                       transition={{ type: "spring", stiffness: 300 }}
                     >
                       <label htmlFor="name" className="block text-sm font-medium text-gray-900">
-                        Full name
+                        Full name *
                       </label>
                       <input
                         id="name"
+                        name="name"
                         type="text"
+                        required
                         placeholder="Your full name"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent outline-none transition-all"
                       />
@@ -218,11 +263,13 @@ export default function Contact() {
                       transition={{ type: "spring", stiffness: 300 }}
                     >
                       <label htmlFor="email" className="block text-sm font-medium text-gray-900">
-                        Email
+                        Email *
                       </label>
                       <input
                         id="email"
+                        name="email"
                         type="email"
+                        required
                         placeholder="you@example.com"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent outline-none transition-all"
                       />
@@ -236,15 +283,17 @@ export default function Contact() {
                       transition={{ type: "spring", stiffness: 300 }}
                     >
                       <label htmlFor="province" className="block text-sm font-medium text-gray-900">
-                        Province
+                        Province *
                       </label>
                       <select
                         id="province"
+                        name="province"
+                        required
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent outline-none transition-all"
                       >
                         <option value="">Select province</option>
                         {provinces.map((province) => (
-                          <option key={province} value={province.toLowerCase()}>
+                          <option key={province} value={province}>
                             {province}
                           </option>
                         ))}
@@ -256,11 +305,13 @@ export default function Contact() {
                       transition={{ type: "spring", stiffness: 300 }}
                     >
                       <label htmlFor="location" className="block text-sm font-medium text-gray-900">
-                        Property location
+                        Property location *
                       </label>
                       <input
                         id="location"
+                        name="property_location"
                         type="text"
+                        required
                         placeholder="City, Province"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent outline-none transition-all"
                       />
@@ -274,15 +325,17 @@ export default function Contact() {
                       transition={{ type: "spring", stiffness: 300 }}
                     >
                       <label htmlFor="purpose" className="block text-sm font-medium text-gray-900">
-                        Purpose
+                        Purpose *
                       </label>
                       <select
                         id="purpose"
+                        name="purpose"
+                        required
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent outline-none transition-all"
                       >
                         <option value="">Select purpose</option>
                         {purposes.map((purpose) => (
-                          <option key={purpose} value={purpose.toLowerCase()}>
+                          <option key={purpose} value={purpose}>
                             {purpose}
                           </option>
                         ))}
@@ -294,11 +347,13 @@ export default function Contact() {
                       transition={{ type: "spring", stiffness: 300 }}
                     >
                       <label htmlFor="amount" className="block text-sm font-medium text-gray-900">
-                        Approx. loan amount
+                        Approx. loan amount *
                       </label>
                       <input
                         id="amount"
+                        name="loan_amount"
                         type="text"
+                        required
                         placeholder="$500,000"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent outline-none transition-all"
                       />
@@ -311,11 +366,13 @@ export default function Contact() {
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <label htmlFor="timeline" className="block text-sm font-medium text-gray-900">
-                      Timeline
+                      Timeline *
                     </label>
                     <input
                       id="timeline"
+                      name="timeline"
                       type="text"
+                      required
                       placeholder="e.g., Closing in 30 days"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent outline-none transition-all"
                     />
@@ -331,6 +388,7 @@ export default function Contact() {
                     </label>
                     <textarea
                       id="message"
+                      name="message"
                       placeholder="Tell us more about your scenario..."
                       rows={4}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent outline-none transition-all resize-none"
@@ -338,24 +396,30 @@ export default function Contact() {
                   </motion.div>
 
                   <motion.button
-                    onClick={handleSubmit}
-                    className="w-full px-6 py-3 bg-orange-600 hover:bg-orange-600/90 text-white rounded-lg font-medium inline-flex items-center justify-center transition-colors"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full px-6 py-3 bg-orange-600 hover:bg-orange-600/90 disabled:bg-orange-400 disabled:cursor-not-allowed text-white rounded-lg font-medium inline-flex items-center justify-center transition-colors"
+                    whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                    whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                   >
-                    Submit Scenario
-                    <Send className="ml-2" />
+                    {isSubmitting ? 'Submitting...' : 'Submit Scenario'}
+                    {!isSubmitting && <Send className="ml-2" />}
                   </motion.button>
-                </motion.div>
+                </motion.form>
               ) : (
-                <motion.div 
+                <motion.form
                   key="investor"
+                  onSubmit={handleSubmit}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ duration: 0.3 }}
                   className="space-y-4 sm:space-y-6"
                 >
+                  {/* Hidden fields for Web3Forms */}
+                  <input type="hidden" name="subject" value="New Investor Contact Form Submission" />
+                  <input type="hidden" name="from_name" value="Covantra Website" />
+                  
                   <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                     <motion.div 
                       className="space-y-2"
@@ -363,11 +427,13 @@ export default function Contact() {
                       transition={{ type: "spring", stiffness: 300 }}
                     >
                       <label htmlFor="investor-name" className="block text-sm font-medium text-gray-900">
-                        Full name
+                        Full name *
                       </label>
                       <input
                         id="investor-name"
+                        name="name"
                         type="text"
+                        required
                         placeholder="Your full name"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent outline-none transition-all"
                       />
@@ -378,11 +444,13 @@ export default function Contact() {
                       transition={{ type: "spring", stiffness: 300 }}
                     >
                       <label htmlFor="investor-email" className="block text-sm font-medium text-gray-900">
-                        Email
+                        Email *
                       </label>
                       <input
                         id="investor-email"
+                        name="email"
                         type="email"
+                        required
                         placeholder="you@example.com"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent outline-none transition-all"
                       />
@@ -396,15 +464,17 @@ export default function Contact() {
                       transition={{ type: "spring", stiffness: 300 }}
                     >
                       <label htmlFor="jurisdiction" className="block text-sm font-medium text-gray-900">
-                        Jurisdiction
+                        Jurisdiction *
                       </label>
                       <select
                         id="jurisdiction"
+                        name="jurisdiction"
+                        required
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent outline-none transition-all"
                       >
                         <option value="">Select jurisdiction</option>
                         {provinces.map((province) => (
-                          <option key={province} value={province.toLowerCase()}>
+                          <option key={province} value={province}>
                             {province}
                           </option>
                         ))}
@@ -416,15 +486,17 @@ export default function Contact() {
                       transition={{ type: "spring", stiffness: 300 }}
                     >
                       <label htmlFor="category" className="block text-sm font-medium text-gray-900">
-                        Investor category
+                        Investor category *
                       </label>
                       <select
                         id="category"
+                        name="investor_category"
+                        required
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent outline-none transition-all"
                       >
                         <option value="">Select category</option>
                         {investorCategories.map((category) => (
-                          <option key={category} value={category.toLowerCase()}>
+                          <option key={category} value={category}>
                             {category}
                           </option>
                         ))}
@@ -438,11 +510,13 @@ export default function Contact() {
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <label htmlFor="ticket" className="block text-sm font-medium text-gray-900">
-                      Typical ticket size
+                      Typical ticket size *
                     </label>
                     <input
                       id="ticket"
+                      name="ticket_size"
                       type="text"
+                      required
                       placeholder="e.g., $100,000 - $250,000"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent outline-none transition-all"
                     />
@@ -454,10 +528,12 @@ export default function Contact() {
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <label htmlFor="investor-message" className="block text-sm font-medium text-gray-900">
-                      Message
+                      Message *
                     </label>
                     <textarea
                       id="investor-message"
+                      name="message"
+                      required
                       placeholder="Tell us about your investment interests..."
                       rows={4}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent outline-none transition-all resize-none"
@@ -465,21 +541,21 @@ export default function Contact() {
                   </motion.div>
 
                   <motion.button
-                    onClick={handleSubmit}
-                    className="w-full px-6 py-3 bg-orange-600 hover:bg-orange-600/90 text-white rounded-lg font-medium inline-flex items-center justify-center transition-colors"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full px-6 py-3 bg-orange-600 hover:bg-orange-600/90 disabled:bg-orange-400 disabled:cursor-not-allowed text-white rounded-lg font-medium inline-flex items-center justify-center transition-colors"
+                    whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                    whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                   >
-                    Request Early Access
-                    <ArrowRight className="ml-2" />
+                    {isSubmitting ? 'Submitting...' : 'Request Early Access'}
+                    {!isSubmitting && <ArrowRight className="ml-2" />}
                   </motion.button>
-                </motion.div>
+                </motion.form>
               )}
             </AnimatePresence>
           </motion.div>
         </motion.div>
       </section>
-      <Footer />
     </div>
   );
 }
