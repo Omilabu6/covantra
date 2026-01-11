@@ -7,6 +7,7 @@ import RealEstate from '../components/RealEstate';
 import Clarity from '../components/Clarity';
 import ClientSay from '../components/ClientSay';
 import Traction from '../components/Traction';
+import { Footer } from '../components/Footer';
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -24,7 +25,7 @@ const Home = () => {
       <Clarity />
       <Traction />
       <ClientSay />
-      
+      <Footer />
     </div>
   );
 };

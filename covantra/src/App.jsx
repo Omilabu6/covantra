@@ -47,7 +47,6 @@ const App = () => {
             <Route path="/resources" element={<Resources />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
-          <Footer />
         </SmoothScroll>
         
         {isLoading && <LoadingReveal onComplete={() => setIsLoading(false)} />}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 const CustomCursor = () => {
@@ -17,14 +17,14 @@ const CustomCursor = () => {
     y: useSpring(mouse.y, smoothOptions)
   };
   
-  const manageMouseMove = (e) => {
+  // Wrap in useCallback to memoize the function
+  const manageMouseMove = useCallback((e) => {
     const { clientX, clientY } = e;
     mouse.x.set(clientX - cursorSize / 2);
     mouse.y.set(clientY - cursorSize / 2);
-  };
+  }, []); // Empty deps since mouse.x and mouse.y are stable references
   
   useEffect(() => {
-    // Check if device is mobile
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 1024 || 'ontouchstart' in window);
     };
@@ -45,9 +45,8 @@ const CustomCursor = () => {
     return () => {
       window.removeEventListener("mousemove", manageMouseMove);
     };
-  }, [isMobile]);
+  }, [isMobile, manageMouseMove]); // Added manageMouseMove to deps
   
-  // Don't render on mobile
   if (isMobile) return null;
   
   return (
