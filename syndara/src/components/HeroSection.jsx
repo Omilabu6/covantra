@@ -7,7 +7,7 @@ const HeroSection = () => {
   const images = [
     '/nice.jpg',
     '/hotel.jpg',
-    '/man.webp',
+    '/man.jpg',
     '/twoStory.jpg'
   ];
 
