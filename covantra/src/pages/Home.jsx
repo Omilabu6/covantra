@@ -8,6 +8,7 @@ import Clarity from '../components/Clarity';
 import ClientSay from '../components/ClientSay';
 import Traction from '../components/Traction';
 import {Footer} from '../components/Footer';
+import SmmothScroll from '../components/SmoothScroll';
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -18,14 +19,16 @@ const Home = () => {
 
   return (
     <div className=" overflow-x-hidden">
-      <HeroSection isVisible={isVisible} />
-      <ActiveBusiness />
-      <InDevelopment />
-      <RealEstate />
-      <Clarity />
-      <Traction />
-      <ClientSay />
-       <Footer />
+      <SmmothScroll>
+        <HeroSection isVisible={isVisible} />
+        <ActiveBusiness />
+        <InDevelopment />
+        <RealEstate />
+        <Clarity />
+        <Traction />
+        <ClientSay />
+        <Footer />
+     </SmmothScroll> 
     </div>
   );
 };
