@@ -242,18 +242,18 @@ const CaseStudies = () => {
 
       {/* CTA Section */}
       <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-amber-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl  mx-auto">
+          <div className="">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-gray-900 font-normal">
-                Have a similar <br />
-                <span className="italic text-orange-600">scenario?</span>
+              <h2 className="font-serif text-center text-3xl md:text-4xl lg:text-5xl text-gray-900 font-normal">
+                Have a similar
+                <span className="italic ml-3 text-orange-600">scenario?</span>
               </h2>
-              <p className="mt-4 md:mt-6 text-lg text-gray-600 max-w-md">
+              <p className="mt-4 text-center md:mt-6 text-lg text-gray-600 ">
                 We're happy to discuss what's realistic and outline next steps for
                 your specific situation.
               </p>
@@ -263,7 +263,7 @@ const CaseStudies = () => {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="flex flex-col sm:flex-row gap-4 lg:justify-end"
+              className="flex flex-col sm:flex-row gap-4 lg:justify-center mt-8"
             >
               <a 
                 href="/contact" 

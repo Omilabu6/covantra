@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {motion} from "framer-motion"
 
 // Icon Components
 const ArrowLeft = () => (
@@ -296,19 +297,31 @@ const Clarity = () => {
       <div className="relative max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 md:mb-20">
-          <h2 
-            className={`font-serif text-3xl md:text-4xl lg:text-5xl font-normal text-gray-900 mb-4 md:mb-6 ${isVisible ? 'animate-fade-up' : 'opacity-0'}`}
-            style={{ animationDelay: '100ms' }}
+          <motion.h2 
+           initial={{ opacity: 0, y: 25 }}   
+            whileInView={{ opacity: 1, y: 0 }} 
+            transition={{
+              duration: 0.8,
+              ease: "easeOut"
+            }}
+            viewport={{ once: false }} 
+            className={`font-serif text-3xl md:text-4xl lg:text-5xl font-normal text-gray-900 mb-4 md:mb-6 `}  
           >
             Clarity on what exists today
-          </h2>
+          </motion.h2>
 
-          <p 
-            className={`text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto ${isVisible ? 'animate-fade-up' : 'opacity-0'}`}
-            style={{ animationDelay: '200ms' }}
+          <motion.p 
+           initial={{ opacity: 0, y: 25 }}   
+            whileInView={{ opacity: 1, y: 0 }} 
+            transition={{
+              duration: 0.8,
+              ease: "easeOut"
+            }}
+            viewport={{ once: false }} 
+            className={`text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto `}
           >
             We believe in transparency. Here's exactly what's live and what we're building.
-          </p>
+          </motion.p>
         </div>
 
         {/* Live Today Section */}

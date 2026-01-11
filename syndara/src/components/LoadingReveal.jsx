@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 
 const LoadingReveal = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
-  const [prevProgress, setPrevProgress] = useState(0);
   const [stage, setStage] = useState('loading');
   const [slicePhase, setSlicePhase] = useState('idle');
    
@@ -37,13 +36,12 @@ const LoadingReveal = ({ onComplete }) => {
       const updateProgress = () => {
         loadedImages++;
         const newProgress = Math.round((loadedImages / totalImages) * 100);
-        setPrevProgress(prev => prev);
         setProgress(newProgress);
         
         console.log(`Image loaded: ${loadedImages}/${totalImages} (${newProgress}%)`);
         
         if (loadedImages === totalImages) {
-          setTimeout(() => setStage('brandReveal'), 500);
+          setTimeout(() => setStage('fadeOut'), 500);
         }
       };
 
@@ -77,7 +75,7 @@ const LoadingReveal = ({ onComplete }) => {
           if (!success) {
             console.log('No images found after DOM stabilized');
             setProgress(100);
-            setTimeout(() => setStage('brandReveal'), 500);
+            setTimeout(() => setStage('fadeOut'), 500);
           }
         }
       } else {
@@ -90,11 +88,11 @@ const LoadingReveal = ({ onComplete }) => {
   }, []);
 
   useEffect(() => {
-    if (stage === 'brandReveal') {
+    if (stage === 'fadeOut') {
       setTimeout(() => {
         setStage('slicing');
         setSlicePhase('dropping');
-      }, 1200);
+      }, 800);
     } else if (stage === 'slicing' && slicePhase === 'dropping') {
       setTimeout(() => setSlicePhase('splitting'), 700);
     } else if (slicePhase === 'splitting') {
@@ -106,8 +104,8 @@ const LoadingReveal = ({ onComplete }) => {
 
   if (stage === 'complete') return null;
 
-  const currentDigits = progress.toString().split('');
-  const prevDigits = prevProgress.toString().split('');
+  const isVisible = stage === 'loading' || stage === 'fadeOut';
+  const isFadingOut = stage === 'fadeOut';
 
   return (
     <div className="fixed inset-0 z-50 pointer-events-none">
@@ -131,84 +129,48 @@ const LoadingReveal = ({ onComplete }) => {
 
       {/* Center content */}
       <div className="absolute inset-0 flex items-center justify-center z-30">
-        {stage === 'loading' && (
+        {isVisible && (
           <div 
-            className="flex"
+            className="flex flex-col items-center gap-6"
             style={{
-              height: 'clamp(80px, 15vw, 180px)',
-              opacity: stage === 'brandReveal' ? 0 : 1,
-              transition: 'opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+              opacity: isFadingOut ? 0 : 1,
+              transition: 'opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
             }}
           >
-            {currentDigits.map((digit, index) => {
-              const positionFromRight = currentDigits.length - 1 - index;
-              const prevPositionFromRight = prevDigits.length - 1 - positionFromRight;
-              const prevDigit = prevPositionFromRight >= 0 ? prevDigits[prevPositionFromRight] : null;
-              const hasChanged = digit !== prevDigit;
-              
-              return (
-                <div
-                  key={`${progress}-${index}`}
-                  className="relative inline-block overflow-hidden"
-                  style={{
-                    width: 'clamp(48px, 9vw, 108px)',
-                    height: 'clamp(80px, 15vw, 180px)',
-                  }}
-                >
-                  {hasChanged && prevDigit !== null && (
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        fontSize: 'clamp(80px, 15vw, 180px)',
-                        lineHeight: 1,
-                        fontWeight: 900,
-                        animation: 'slideOutUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards',
-                        textAlign: 'center'
-                      }}
-                      className="tabular-nums select-none"
-                    >
-                      {prevDigit}
-                    </div>
-                  )}
-                  
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      fontSize: 'clamp(80px, 15vw, 180px)',
-                      lineHeight: 1,
-                      fontWeight: 900,
-                      animation: hasChanged ? 'slideInUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards' : 'none',
-                      textAlign: 'center'
-                    }}
-                    className="tabular-nums select-none"
-                  >
-                    {digit}
-                  </div>
-                </div>
-              );
-            })}
+            <h1
+              style={{
+                fontSize: 'clamp(2rem, 8vw, 6rem)',
+                letterSpacing: '0.2em',
+                fontWeight: 700,
+              }}
+            >
+              COVANTRA
+            </h1>
+            
+            {/* Loading bar container */}
+            <div 
+              className="relative"
+              style={{
+                width: 'clamp(200px, 40vw, 400px)',
+                height: '2px',
+                backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                overflow: 'hidden',
+              }}
+            >
+              {/* Loading bar fill */}
+              <div
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  height: '100%',
+                  width: `${progress}%`,
+                  backgroundColor: '#000',
+                  transition: 'width 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
+                }}
+              />
+            </div>
           </div>
-        )}
-
-        {stage === 'brandReveal' && (
-          <h1
-            style={{
-              fontSize: 'clamp(2rem, 8vw, 6rem)',
-              letterSpacing: '0.2em',
-              fontWeight: 700,
-              opacity: 1,
-              transform: 'scale(1)',
-              animation: 'fadeScale 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards'
-            }}
-          >
-            SYNDARA
-          </h1>
         )}
       </div>
 
@@ -253,21 +215,9 @@ const LoadingReveal = ({ onComplete }) => {
       )}
 
       <style>{`
-        @keyframes fadeScale {
-          from { opacity: 0; transform: scale(0.9); }
-          to { opacity: 1; transform: scale(1); }
-        }
         @keyframes dropLineDown {
           from { height: 0; }
           to { height: 100vh; }
-        }
-        @keyframes slideInUp {
-          from { transform: translateY(100%); opacity: 0; }
-          to { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes slideOutUp {
-          from { transform: translateY(0); opacity: 1; }
-          to { transform: translateY(-100%); opacity: 0; }
         }
       `}</style>
     </div>

@@ -82,7 +82,7 @@ const WhoWeHelpSection = () => {
         </div>
 
         {/* Slider */}
-        <div className="relative px-2.5 max-w-6xl mx-auto">
+        <div className="relative  px-2.5 max-w-6xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
@@ -93,7 +93,7 @@ const WhoWeHelpSection = () => {
               className="relative overflow-hidden rounded-3xl shadow-2xl"
               style={{ backgroundColor: currentItem.color }}
             >
-              <div className="flex flex-col md:flex-row min-h-[500px]">
+              <div className="flex flex flex-col-reverse flex-col md:flex-row min-h-[500px]">
                 {/* Content Side */}
                 <div className="flex-1 p-8 md:p-12 flex flex-col justify-center">
                   {/* Icon */}

@@ -8,7 +8,7 @@ const HeroSection = () => {
     '/bg.png',
     '/longHouse.png',
     '/shiny.webp',
-    '/twoStory.png'
+    '/twoStory.jpg'
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -66,7 +66,7 @@ const HeroSection = () => {
             key={currentIndex}
             src={images[currentIndex]}
             alt={`Background ${currentIndex + 1}`}
-            className="absolute w-full h-full object-cover"
+            className="absolute  w-full h-full object-cover"
             initial={{ opacity: 0, scale: 1.1 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}

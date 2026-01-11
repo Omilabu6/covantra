@@ -29,7 +29,7 @@ const PhoneMockup = ({ activeIndex }) => {
   const Icon = activeCard.icon;
 
   return (
-    <div className="relative w-full max-w-[240px] md:max-w-[260px] mx-auto">
+    <div className="relative  w-full max-w-[240px] md:max-w-[260px] mx-auto">
       {/* Phone Frame */}
       <div className="relative bg-gray-800 rounded-[2.2rem] p-2 shadow-2xl">
         {/* Phone Screen */}
@@ -327,13 +327,13 @@ const InDevelopmentSection = () => {
           </div>
 
           {/* Phone Mockup */}
-          <div className={`flex justify-center lg:justify-end order-1 lg:order-2 animate-in-view ${isVisible ? 'visible animate-phone-mockup' : ''}`}>
+          <div className={`flex justify-center  lg:justify-end order-1 lg:order-2 animate-in-view ${isVisible ? 'visible animate-phone-mockup' : ''}`}>
             <PhoneMockup activeIndex={activeIndex} />
           </div>
         </div>
 
         {/* Progress Dots - Mobile Only */}
-        <div className="flex lg:hidden justify-center gap-2 mt-8">
+        <div className="flex  lg:hidden justify-center gap-2 mt-8">
           {platformCapabilities.map((_, index) => (
             <button
               key={index}

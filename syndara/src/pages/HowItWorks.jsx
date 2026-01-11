@@ -337,20 +337,20 @@ export default function HowItWorks() {
       </section>
 
       {/* CTA - Split Design */}
-      <section className="relative bg-[#faf8f5] text-black overflow-hidden">
+      <section className=" bg-[#faf8f5] text-black overflow-hidden">
        
-        <div className="relative container mx-auto px-6 md:px-10 py-16 md:py-20 lg:py-28">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="relative  px-6 md:px-10 py-16 md:py-20 lg:py-28">
+          <div className=" items-center justify-center flex flex-col ">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-black font-normal tracking-tight">
-                Ready to <br />
-                <span className="italic text-orange-400">learn more?</span>
+              <h2 className="font-serif text-center text-3xl md:text-4xl lg:text-5xl text-black font-normal tracking-tight">
+                Ready to 
+                <span className="italic ml-3 text-orange-400">learn more?</span>
               </h2>
-              <p className="mt-4 md:mt-6 text-base md:text-lg text-gray-900 max-w-md">
+              <p className="mt-4 md:mt-6 mb-7 text-center text-base md:text-lg text-gray-900 max-w-md">
                 Whether you're a borrower or investor, we'd be happy to discuss how this works.
               </p>
             </motion.div>

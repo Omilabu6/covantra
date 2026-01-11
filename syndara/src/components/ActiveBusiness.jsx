@@ -1,5 +1,6 @@
 import React from 'react';
 import { CheckCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const ActiveBusiness = () => {
   const [isVisible, setIsVisible] = React.useState(false);
@@ -172,13 +173,21 @@ const ActiveBusiness = () => {
         </div>
       </div>
       
-      <div className={`flex justify-center md:justify-end items-end px-0 md:px-20 md:-mt-20 mt-8 animate-in-view ${isVisible ? 'visible animate-image' : ''}`}>
+      <motion.div 
+        initial={{ opacity: 0, x: 100 }}   
+        whileInView={{ opacity: 1, x: 0 }} 
+        transition={{
+          duration: 0.8,
+          ease: "easeOut"
+        }}
+        viewport={{ once: false }} 
+        className={`flex justify-center md:justify-end items-end px-0 md:px-20 md:-mt-20 mt-8 animate-in-view `}>
         <img 
           src="/bg.png" 
           alt="Property" 
           className='rounded-3xl w-full md:w-auto max-w-2xl shadow-lg hover:shadow-xl transition-shadow duration-300' 
         />
-      </div>
+      </motion.div>
     </div>
   );
 };
