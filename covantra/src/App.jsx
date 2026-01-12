@@ -11,6 +11,7 @@ import CaseStudies from './pages/CaseStudies';
 import HowItWorks from './pages/HowItWorks';
 import Resources from './pages/Resources';
 import Legal from './pages/Legal';
+import NotFound from './components/NotFound';
 import Contact from './pages/Contact';
 import ScrollToTop from './components/ScrollToTop';
 import CustomCursor from './components/CustomCursor';
@@ -43,6 +44,7 @@ const App = () => {
             <Route path="/resources" element={<Resources />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/legal" element={<Legal />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         {isLoading && <LoadingReveal onComplete={() => setIsLoading(false)} />}
       </div>
