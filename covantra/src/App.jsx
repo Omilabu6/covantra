@@ -10,6 +10,7 @@ import Investors from './pages/Investors';
 import CaseStudies from './pages/CaseStudies';
 import HowItWorks from './pages/HowItWorks';
 import Resources from './pages/Resources';
+import Legal from './pages/Legal';
 import Contact from './pages/Contact';
 import ScrollToTop from './components/ScrollToTop';
 import CustomCursor from './components/CustomCursor';
@@ -41,6 +42,7 @@ const App = () => {
             <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/legal" element={<Legal />} />
           </Routes>
         {isLoading && <LoadingReveal onComplete={() => setIsLoading(false)} />}
       </div>

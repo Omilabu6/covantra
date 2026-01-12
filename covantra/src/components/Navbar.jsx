@@ -21,11 +21,11 @@ export function Navbar() {
     <>
       {/* Main Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg border-b border-white/30" style={{ position: 'fixed' }} data-scroll-sticky>
-        <nav className="max-w-7xl mx-auto px-8 flex items-center justify-between py-6">
+        <nav className="max-w-7xl mx-auto px-8 flex items-center justify-between py-2">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <span className="font-serif text-2xl font-medium tracking-tight text-gray-900">
-              Covantra
+            <span className="">
+              <img src="/logosite.png" alt="" className="w-40" />
             </span>
           </Link>
 
