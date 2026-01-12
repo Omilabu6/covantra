@@ -14,9 +14,9 @@ const footerLinks = {
     { name: "Resources", href: "/resources" },
     { name: "Contact", href: "/contact" },
   ],
-  legal: [    { name: "Privacy Policy", href: "/legal#privacy" },
-    { name: "Terms of Use", href: "/legal#terms" },
-    { name: "Disclosures", href: "/legal#disclosures" },
+  legal: [    { name: "Privacy Policy", href: "/legal" },
+    { name: "Terms of Use", href: "/legal" },
+    { name: "Disclosures", href: "/legal" },
   ],
 };
 
