@@ -25,7 +25,7 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <span className="">
-              <img src="/logosite.png" alt="" className="w-40" />
+              <img src="/logosite.png" alt="" className="md:w-40 w-20" />
             </span>
           </Link>
 
