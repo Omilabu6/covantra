@@ -19,7 +19,7 @@ const legalSections = [
     id: "privacy-policy",
     title: "Privacy Policy",
     content: [
-      "Syndara collects information you submit through forms, including contact details and scenario information. We use this information to review requests, communicate with you, and support onboarding where applicable.",
+      " Covantra collects information you submit through forms, including contact details and scenario information. We use this information to review requests, communicate with you, and support onboarding where applicable.",
       "We may use vetted service providers for identity verification, secure document handling, and communications. We do not sell personal information.",
       "You may request access, correction, or deletion of your information by contacting us.",
     ],
@@ -29,7 +29,7 @@ const legalSections = [
     title: "Terms of Use",
     content: [
       "Website content is provided for general information and does not constitute legal, tax, or financial advice. You are responsible for decisions made based on your own due diligence and professional advice.",
-      "Syndara is not liable for losses arising from reliance on information on this website.",
+      "Covantra is not liable for losses arising from reliance on information on this website.",
     ],
   },
 ];
