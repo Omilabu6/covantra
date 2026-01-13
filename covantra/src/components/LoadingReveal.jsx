@@ -148,15 +148,14 @@ const LoadingReveal = ({ onComplete }) => {
               transition: 'opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
             }}
           >
-            <h1
+            <img 
+              src="/logosite.png" 
+              alt="Logo"
               style={{
-                fontSize: 'clamp(2rem, 8vw, 6rem)',
-                letterSpacing: '0.2em',
-                fontWeight: 700,
+                maxWidth: 'clamp(200px, 50vw, 400px)',
+                height: 'auto',
               }}
-            >
-              COVANTRA
-            </h1>
+            />
             
             {/* Loading bar container */}
             <div 
@@ -176,7 +175,7 @@ const LoadingReveal = ({ onComplete }) => {
                   top: 0,
                   height: '100%',
                   width: `${progress}%`,
-                  backgroundColor: '#000',
+                  backgroundColor: '#FF6B35',
                   transition: 'width 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
                 }}
               />
@@ -208,7 +207,7 @@ const LoadingReveal = ({ onComplete }) => {
       {stage === 'slicing' && slicePhase === 'splitting' && (
         <>
           <div
-            className="absolute top-0 bg-black z-40"
+            className="absolute top-0 bg-orange-500 z-40"
             style={{
               left: '50%',
               width: '2px',
@@ -218,7 +217,7 @@ const LoadingReveal = ({ onComplete }) => {
             }}
           />
           <div
-            className="absolute top-0 bg-black z-40"
+            className="absolute top-0 bg-orange-500 z-40"
             style={{
               left: '50%',
               width: '2px',
