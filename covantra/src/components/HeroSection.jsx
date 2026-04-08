@@ -137,16 +137,20 @@ const HeroSection = () => {
                 data-scroll-speed="1.5" 
                 className="bg-orange-500 w-full sm:w-auto flex justify-center text-white px-6 py-3 rounded-lg font-medium  transition"
               >
-                <Link to="/contact" className="flex justify-center items-center">
-                  <span>Submit a Scenario</span>
-                  <motion.span
-                    className="ml-2"
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    <ArrowRight className="h-5 w-5" />
-                  </motion.span>
-                </Link>
+               <a 
+                href="https://app.covantra.com" 
+                className="flex justify-center items-center"
+              >
+                <span>Get Started Now</span>
+
+                <motion.span
+                  className="ml-2"
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowRight className="h-5 w-5" />
+                </motion.span>
+              </a>
               </button>
             </motion.div>
             
@@ -164,7 +168,7 @@ const HeroSection = () => {
                 data-scroll-speed="1.5" 
                 className="border-2 border-white w-full sm:w-auto text-white px-6 py-3 rounded-lg font-medium transition"
               >
-                <Link to="/contact?type=investor">Join Early Access</ Link>
+                <Link to="/contact?type=investor">Submit a Scenario</ Link>
               </button>
             </motion.div>
           </motion.div>

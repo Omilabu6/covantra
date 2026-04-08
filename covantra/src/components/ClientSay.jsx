@@ -92,12 +92,12 @@ const ClientSay = () => {
                   </Link>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link 
-                    to="/contact?type=investor"
+                  <a
+                    href="https://app.covantra.com" 
                     className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 bg-white text-orange-600 border-2 border-orange-600 text-base md:text-lg font-medium rounded-lg hover:bg-orange-100 transition-colors"
                   >
-                    Request Early Access
-                  </Link>
+                    Get Started
+                  </a>
                 </motion.div>
               </div>
             </motion.div>

@@ -121,13 +121,13 @@ export default function HowItWorks() {
                 transition={{ duration: 0.5, delay: 0.5 }}
                 className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4"
               >
-                <Link
-                  to="/contact"
+                <a
+                  href="https://app.covantra.com" 
                   className="inline-flex items-center justify-center px-6 py-3 bg-orange-600 text-white text-base font-medium rounded-lg hover:bg-orange-600/90 transition-colors"
                 >
                   Get Started
                   <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
+                </a>
                 <Link
                   to="#flow"
                   className="inline-flex items-center justify-center px-6 py-3 border-2 border-white/30 text-white text-base font-medium rounded-lg hover:bg-white/5 transition-colors"
