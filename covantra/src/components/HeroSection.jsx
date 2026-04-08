@@ -141,7 +141,7 @@ const HeroSection = () => {
                 href="https://app.covantra.com" 
                 className="flex justify-center items-center"
               >
-                <span>Get Started Now</span>
+                <span>Go to App</span>
 
                 <motion.span
                   className="ml-2"

@@ -96,7 +96,7 @@ const ClientSay = () => {
                     href="https://app.covantra.com" 
                     className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 bg-white text-orange-600 border-2 border-orange-600 text-base md:text-lg font-medium rounded-lg hover:bg-orange-100 transition-colors"
                   >
-                    Get Started
+                    Go to App
                   </a>
                 </motion.div>
               </div>
